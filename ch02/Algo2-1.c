@@ -1,8 +1,8 @@
- /* algo2-1.c 实现算法2.1的程序 */
+ /* Algo2-1.c 实现算法2.1的程序 */
  #include"c1.h"
  typedef int ElemType;
- #include"c2-1.h" /* 采用线性表的动态分配顺序存储结构 */
- #include"bo2-1.c" /* 可以使用bo2-1.c中的基本操作 */
+ #include"C2-1.h" /* 采用线性表的动态分配顺序存储结构 */
+ #include"Bo2-1.c" /* 可以使用bo2-1.c中的基本操作 */
 
  Status equal(ElemType c1,ElemType c2)
  { /* 判断是否相等的函数，Union()用到 */
@@ -17,8 +17,8 @@
    ElemType e;
    int La_len,Lb_len;
    int i;
-   La_len=ListLength(*La); /* 求线性表的长度 */
-   Lb_len=ListLength(Lb);
+   La_len=ListLength(La); /* 求线性表La的长度 */
+   Lb_len=ListLength(Lb); /* 求线性表Lb的长度 */
    for(i=1;i<=Lb_len;i++)
    {
      GetElem(Lb,i,&e); /* 取Lb中第i个数据元素赋给e */
