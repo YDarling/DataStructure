@@ -1,37 +1,14 @@
-/* bo2-1.c 顺序表示的线性表(存储结构由c2-1.h定义)的基本操作(12个) */
-/* c1.h (程序名) */
-#include<string.h>
-#include<ctype.h>
-#include<malloc.h> /* malloc()等 */
-#include<limits.h> /* INT_MAX等 */
-#include<stdio.h> /* EOF(=^Z或F6),NULL */
-#include<stdlib.h> /* atoi() */
-#include<io.h> /* eof() */
-#include<math.h> /* floor(),ceil(),abs() */
-#include<process.h> /* exit() */
-/* 函数结果状态代码 */
-#define TRUE 1
-#define FALSE 0
-#define OK 1
-#define ERROR 0
-#define INFEASIBLE -1
-/* #define OVERFLOW -2 因为在math.h中已定义OVERFLOW的值为3,故去掉此行 */
-typedef int Status; /* Status是函数的类型,其值是函数结果状态代码，如OK等 */
-typedef int Boolean; /* Boolean是布尔类型,其值是TRUE或FALSE */
-typedef int ElemType;
+/* SqList.h 顺序表示的线性表的基本操作(12个) */
 
-/* c2-1.h 线性表的动态分配顺序存储结构 */
+/* 顺序线性表的动态分配顺序存储结构 */
 #define LIST_INIT_SIZE 10 /* 线性表存储空间的初始分配量 */
 #define LISTINCREMENT 2 /* 线性表存储空间的分配增量 */
-typedef struct
-{
+typedef struct{
 	ElemType* elem; /* 存储空间基址 */
 	int length; /* 当前长度 */
 	int listsize; /* 当前分配的存储容量(以sizeof(ElemType)为单位) */
 }SqList;
 
-
-/* bo2-1.c 顺序表示的线性表(存储结构由c2-1.h定义)的基本操作(12个) */
  Status InitList(SqList *L) /* 算法2.3 */
  { /* 操作结果：构造一个空的顺序线性表 */
    (*L).elem=(ElemType*)malloc(LIST_INIT_SIZE*sizeof(ElemType));
