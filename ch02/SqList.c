@@ -1,7 +1,6 @@
- /* main2-1.c 检验bo2-1.c的主程序 */
+ /* SqList.c 检验SqList.h的主程序 */
  #include"c1.h"
- #include"c2-1.h"
- #include"bo2-1.c"
+ #include"SqList.h"
  
  typedef int ElemType;
  
