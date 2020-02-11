@@ -1,6 +1,13 @@
  /* DuLinkList.h 
  双链循环线性表(存储结构由DuLinkList.h定义)的基本操作(14个)
  */
+
+//双向链表的存储结构定义
+ typedef struct DuLNode
+ {
+   ElemType data;
+   struct DuLNode *prior,*next;
+ }DuLNode,*DuLinkList;
  
 Status InitList(DuLinkList *L)
  { /* 产生空的双向循环链表L */
