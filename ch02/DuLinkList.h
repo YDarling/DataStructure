@@ -1,7 +1,8 @@
- /* DuLinkList.c 
- 双链循环线性表(存储结构由c2-4.h定义)的基本操作(14个)
+ /* DuLinkList.h 
+ 双链循环线性表(存储结构由DuLinkList.h定义)的基本操作(14个)
  */
- Status InitList(DuLinkList *L)
+ 
+Status InitList(DuLinkList *L)
  { /* 产生空的双向循环链表L */
    *L=(DuLinkList)malloc(sizeof(DuLNode));
    if(*L)
