@@ -1,16 +1,26 @@
- /* bo3-1.c Ë³ĞòÕ»£¨´æ´¢½á¹¹ÓÉc3-1.h¶¨Òå£©µÄ»ù±¾²Ù×÷£¨9¸ö£© */
+ /* SqStack.h å®šä¹‰é¡ºåºæ ˆçš„å­˜å‚¨ç»“æ„åŠå…¶åŸºæœ¬æ“ä½œ(9ä¸ª)çš„å¤´æ–‡ä»¶ */
+
+ #define STACK_INIT_SIZE 10 /* å­˜å‚¨ç©ºé—´åˆå§‹åˆ†é…é‡ */
+ #define STACKINCREMENT 2 /* å­˜å‚¨ç©ºé—´åˆ†é…å¢é‡ */
+ typedef struct SqStack
+ {
+   SElemType *base; /* åœ¨æ ˆæ„é€ ä¹‹å‰å’Œé”€æ¯ä¹‹åï¼Œbaseçš„å€¼ä¸ºNULL */
+   SElemType *top; /* æ ˆé¡¶æŒ‡é’ˆ */
+   int stacksize; /* å½“å‰å·²åˆ†é…çš„å­˜å‚¨ç©ºé—´ï¼Œä»¥å…ƒç´ ä¸ºå•ä½ */
+ }SqStack; /* é¡ºåºæ ˆ */ 
+
  Status InitStack(SqStack *S)
- { /* ¹¹ÔìÒ»¸ö¿ÕÕ»S */
+ { /* æ„é€ ä¸€ä¸ªç©ºæ ˆS */
    (*S).base=(SElemType *)malloc(STACK_INIT_SIZE*sizeof(SElemType));
    if(!(*S).base)
-     exit(OVERFLOW); /* ´æ´¢·ÖÅäÊ§°Ü */
+     exit(OVERFLOW); /* å­˜å‚¨åˆ†é…å¤±è´¥ */
    (*S).top=(*S).base;
    (*S).stacksize=STACK_INIT_SIZE;
    return OK;
  }
 
  Status DestroyStack(SqStack *S)
- { /* Ïú»ÙÕ»S£¬S²»ÔÙ´æÔÚ */
+ { /* é”€æ¯æ ˆSï¼ŒSä¸å†å­˜åœ¨ */
    free((*S).base);
    (*S).base=NULL;
    (*S).top=NULL;
@@ -19,13 +29,13 @@
  }
 
  Status ClearStack(SqStack *S)
- { /* °ÑSÖÃÎª¿ÕÕ» */
+ { /* æŠŠSç½®ä¸ºç©ºæ ˆ */
    (*S).top=(*S).base;
    return OK;
  }
 
  Status StackEmpty(SqStack S)
- { /* ÈôÕ»SÎª¿ÕÕ»£¬Ôò·µ»ØTRUE£¬·ñÔò·µ»ØFALSE */
+ { /* è‹¥æ ˆSä¸ºç©ºæ ˆï¼Œåˆ™è¿”å›TRUEï¼Œå¦åˆ™è¿”å›FALSE */
    if(S.top==S.base)
      return TRUE;
    else
@@ -33,12 +43,12 @@
  }
 
  int StackLength(SqStack S)
- { /* ·µ»ØSµÄÔªËØ¸öÊı£¬¼´Õ»µÄ³¤¶È */
+ { /* è¿”å›Sçš„å…ƒç´ ä¸ªæ•°ï¼Œå³æ ˆçš„é•¿åº¦ */
    return S.top-S.base;
  }
 
  Status GetTop(SqStack S,SElemType *e)
- { /* ÈôÕ»²»¿Õ£¬ÔòÓÃe·µ»ØSµÄÕ»¶¥ÔªËØ£¬²¢·µ»ØOK£»·ñÔò·µ»ØERROR */
+ { /* è‹¥æ ˆä¸ç©ºï¼Œåˆ™ç”¨eè¿”å›Sçš„æ ˆé¡¶å…ƒç´ ï¼Œå¹¶è¿”å›OKï¼›å¦åˆ™è¿”å›ERROR */
    if(S.top>S.base)
    {
      *e=*(S.top-1);
@@ -49,12 +59,12 @@
  }
 
  Status Push(SqStack *S,SElemType e)
- { /* ²åÈëÔªËØeÎªĞÂµÄÕ»¶¥ÔªËØ */
-   if((*S).top-(*S).base>=(*S).stacksize) /* Õ»Âú£¬×·¼Ó´æ´¢¿Õ¼ä */
+ { /* æ’å…¥å…ƒç´ eä¸ºæ–°çš„æ ˆé¡¶å…ƒç´  */
+   if((*S).top-(*S).base>=(*S).stacksize) /* æ ˆæ»¡ï¼Œè¿½åŠ å­˜å‚¨ç©ºé—´ */
    {
      (*S).base=(SElemType *)realloc((*S).base,((*S).stacksize+STACKINCREMENT)*sizeof(SElemType));
      if(!(*S).base)
-       exit(OVERFLOW); /* ´æ´¢·ÖÅäÊ§°Ü */
+       exit(OVERFLOW); /* å­˜å‚¨åˆ†é…å¤±è´¥ */
      (*S).top=(*S).base+(*S).stacksize;
      (*S).stacksize+=STACKINCREMENT;
    }
@@ -63,7 +73,7 @@
  }
 
  Status Pop(SqStack *S,SElemType *e)
- { /* ÈôÕ»²»¿Õ£¬ÔòÉ¾³ıSµÄÕ»¶¥ÔªËØ£¬ÓÃe·µ»ØÆäÖµ£¬²¢·µ»ØOK£»·ñÔò·µ»ØERROR */
+ { /* è‹¥æ ˆä¸ç©ºï¼Œåˆ™åˆ é™¤Sçš„æ ˆé¡¶å…ƒç´ ï¼Œç”¨eè¿”å›å…¶å€¼ï¼Œå¹¶è¿”å›OKï¼›å¦åˆ™è¿”å›ERROR */
    if((*S).top==(*S).base)
      return ERROR;
    *e=*--(*S).top;
@@ -71,8 +81,8 @@
  }
 
  Status StackTraverse(SqStack S,Status(*visit)(SElemType))
- { /* ´ÓÕ»µ×µ½Õ»¶¥ÒÀ´Î¶ÔÕ»ÖĞÃ¿¸öÔªËØµ÷ÓÃº¯Êıvisit()¡£ */
-   /* Ò»µ©visit()Ê§°Ü£¬Ôò²Ù×÷Ê§°Ü */
+ { /* ä»æ ˆåº•åˆ°æ ˆé¡¶ä¾æ¬¡å¯¹æ ˆä¸­æ¯ä¸ªå…ƒç´ è°ƒç”¨å‡½æ•°visit()ã€‚ */
+   /* ä¸€æ—¦visit()å¤±è´¥ï¼Œåˆ™æ“ä½œå¤±è´¥ */
    while(S.top>S.base)
      visit(*S.base++);
    printf("\n");
