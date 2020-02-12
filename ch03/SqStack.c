@@ -1,8 +1,7 @@
  /* SqStack.c 检验SqStack.h的主程序 */
  #include"c1.h"
- typedef int SElemType; /* 定义栈元素类型，此句要在c3-1.h的前面 */
- #include"c3-1.h"
- #include"bo3-1.c"
+ #include"SqStack.h"
+ typedef int SElemType; /* 定义栈元素类型 */
 
  Status visit(SElemType c)
  {
